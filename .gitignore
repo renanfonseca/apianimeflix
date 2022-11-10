@@ -15,6 +15,7 @@ application.properties
 *.zip
 *.tar.gz
 *.rar
+mvnw
 
 ### Maven ###
 ### Maven ###
