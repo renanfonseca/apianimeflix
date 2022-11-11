@@ -1,5 +1,6 @@
 package com.renanfonseca.apianimeflix.controller;
 
+import com.renanfonseca.apianimeflix.dto.EpisodioDTO;
 import com.renanfonseca.apianimeflix.model.Episodio;
 import com.renanfonseca.apianimeflix.repository.EpisodioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class EpisodiosController {
     private EpisodioRepository episodioRepository;
 
     @GetMapping
-    public List<Episodio> allEpisodios() {
+    public List<EpisodioDTO> allEpisodios() {
         List<Episodio> episodioList = episodioRepository.findAll();
-        return episodioList;
+        return EpisodioDTO.toDTO(episodioList);
     }
 }
