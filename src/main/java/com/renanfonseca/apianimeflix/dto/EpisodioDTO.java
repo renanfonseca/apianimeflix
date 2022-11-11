@@ -3,6 +3,7 @@ package com.renanfonseca.apianimeflix.dto;
 import com.renanfonseca.apianimeflix.model.Episodio;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class EpisodioDTO {
@@ -23,6 +24,8 @@ public class EpisodioDTO {
         this.sinopse = episodio.getSinopse();
         this.url = episodio.getUrl();
     }
+
+
 
     public Long getId() {
         return id;
@@ -50,4 +53,13 @@ public class EpisodioDTO {
                     return new EpisodioDTO(e);
                 }).collect(Collectors.toList());
     }
+
+    public static List<EpisodioDTO> toDTO(Optional<Episodio> episodio) {
+        return episodio.stream()
+                .map(e -> {
+                    return new EpisodioDTO(e);
+                }).collect(Collectors.toList());
+    }
+
+
 }
