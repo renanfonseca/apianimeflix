@@ -1,16 +1,22 @@
 package com.renanfonseca.apianimeflix.controller;
 
 import com.renanfonseca.apianimeflix.dto.EpisodioDTO;
+import com.renanfonseca.apianimeflix.form.EpisodioForm;
 import com.renanfonseca.apianimeflix.model.Episodio;
 import com.renanfonseca.apianimeflix.repository.EpisodioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Episodios")
+@RequestMapping("/episodios")
 public class EpisodiosController {
 
     @Autowired
@@ -29,5 +35,14 @@ public class EpisodiosController {
             return EpisodioDTO.toDTO(episodio);
         }
         return null;
+    }
+
+    @Transactional
+    @PostMapping
+    public ResponseEntity<EpisodioDTO> cadastrarEpisodio(@RequestBody @Valid EpisodioForm episodioForm, UriComponentsBuilder uriComponentsBuilder) {
+        Episodio episodio = episodioForm.converter();
+        episodioRepository.save(episodio);
+        URI uri = uriComponentsBuilder.path("/episodios/{id}").buildAndExpand(episodio.getId()).toUri();
+        return ResponseEntity.created(uri).body(new EpisodioDTO(episodio));
     }
 }

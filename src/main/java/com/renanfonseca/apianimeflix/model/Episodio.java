@@ -16,7 +16,14 @@ public class Episodio {
     private String sinopse;
     private String url;
 
-    public long getId() {
+    public Episodio(String nome, int numeroEpisodio, String sinopse, String url) {
+        this.nome = nome;
+        this.numeroEpisodio = numeroEpisodio;
+        this.sinopse = sinopse;
+        this.url = url;
+    }
+
+    public Long getId() {
         return id;
     }
 
