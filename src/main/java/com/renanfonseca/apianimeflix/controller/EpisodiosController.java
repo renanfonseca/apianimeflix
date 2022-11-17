@@ -1,6 +1,7 @@
 package com.renanfonseca.apianimeflix.controller;
 
 import com.renanfonseca.apianimeflix.dto.EpisodioDTO;
+import com.renanfonseca.apianimeflix.form.EpisodioAtualizarForm;
 import com.renanfonseca.apianimeflix.form.EpisodioForm;
 import com.renanfonseca.apianimeflix.model.Episodio;
 import com.renanfonseca.apianimeflix.repository.EpisodioRepository;
@@ -44,5 +45,13 @@ public class EpisodiosController {
         episodioRepository.save(episodio);
         URI uri = uriComponentsBuilder.path("/episodios/{id}").buildAndExpand(episodio.getId()).toUri();
         return ResponseEntity.created(uri).body(new EpisodioDTO(episodio));
+    }
+
+    @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity<EpisodioDTO> atualizarEpisodio(@PathVariable("id") Long id, @RequestBody @Valid EpisodioAtualizarForm episodioAtualizarForm) {
+        Episodio episodio = episodioAtualizarForm.atualizar(id, episodioRepository);
+
+        return ResponseEntity.ok(new EpisodioDTO(episodio));
     }
 }

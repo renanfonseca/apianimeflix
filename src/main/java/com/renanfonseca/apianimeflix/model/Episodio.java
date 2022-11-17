@@ -1,9 +1,6 @@
 package com.renanfonseca.apianimeflix.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Episodio {
@@ -12,11 +9,16 @@ public class Episodio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private int numeroEpisodio;
+    private Integer numeroEpisodio;
     private String sinopse;
     private String url;
 
+    public  Episodio() {
+
+    }
+
     public Episodio(String nome, int numeroEpisodio, String sinopse, String url) {
+        super();
         this.nome = nome;
         this.numeroEpisodio = numeroEpisodio;
         this.sinopse = sinopse;

@@ -10,7 +10,7 @@ public class EpisodioDTO {
 
     private Long id;
     private String nome;
-    private int numeroEpisodio;
+    private Integer numeroEpisodio;
     private String sinopse;
     private String url;
 
@@ -20,7 +20,7 @@ public class EpisodioDTO {
     public EpisodioDTO (Episodio episodio) {
         this.id = episodio.getId();
         this.nome = episodio.getNome();
-        this.numeroEpisodio = getNumeroEpisodio();
+        this.numeroEpisodio = episodio.getNumeroEpisodio();
         this.sinopse = episodio.getSinopse();
         this.url = episodio.getUrl();
     }
