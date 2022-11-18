@@ -5,6 +5,7 @@ import com.renanfonseca.apianimeflix.form.EpisodioAtualizarForm;
 import com.renanfonseca.apianimeflix.form.EpisodioForm;
 import com.renanfonseca.apianimeflix.model.Episodio;
 import com.renanfonseca.apianimeflix.repository.EpisodioRepository;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,5 +54,11 @@ public class EpisodiosController {
         Episodio episodio = episodioAtualizarForm.atualizar(id, episodioRepository);
 
         return ResponseEntity.ok(new EpisodioDTO(episodio));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletarEpisodio(@PathVariable("id") Long id){
+        episodioRepository.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 }
